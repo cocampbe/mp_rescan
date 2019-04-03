@@ -1,0 +1,5 @@
+multipath -ll $1 | grep running | awk '{print $3}' | while read i
+do
+echo 1 > /sys/block/$i/device/rescan
+done
+multipathd -k"resize map $1"
